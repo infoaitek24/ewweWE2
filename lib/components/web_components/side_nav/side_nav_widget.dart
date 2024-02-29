@@ -168,40 +168,35 @@ class _SideNavWidgetState extends State<SideNavWidget> {
                   onExit: ((event) async {
                     setState(() => _model.mouseRegionHovered2 = false);
                   }),
-                  child: InkWell(
-                    splashColor: Colors.transparent,
-                    focusColor: Colors.transparent,
-                    hoverColor: Colors.transparent,
-                    highlightColor: Colors.transparent,
-                    onTap: () async {
-                      context.pushNamed(
-                        'main_Chat',
-                        extra: <String, dynamic>{
-                          kTransitionInfoKey: const TransitionInfo(
-                            hasTransition: true,
-                            transitionType: PageTransitionType.fade,
-                            duration: Duration(milliseconds: 0),
-                          ),
-                        },
-                      );
-                    },
-                    child: AnimatedContainer(
-                      duration: const Duration(milliseconds: 250),
-                      curve: Curves.easeInOut,
-                      width: 44.0,
-                      height: 44.0,
-                      decoration: BoxDecoration(
-                        color: () {
-                          if (widget.selectedNav == 2) {
-                            return FlutterFlowTheme.of(context).accent1;
-                          } else if (_model.mouseRegionHovered2) {
-                            return FlutterFlowTheme.of(context).accent1;
-                          } else {
-                            return FlutterFlowTheme.of(context).primary;
-                          }
-                        }(),
-                        borderRadius: BorderRadius.circular(12.0),
-                        border: Border.all(
+                  child: Visibility(
+                    visible: responsiveVisibility(
+                      context: context,
+                      tabletLandscape: false,
+                      desktop: false,
+                    ),
+                    child: InkWell(
+                      splashColor: Colors.transparent,
+                      focusColor: Colors.transparent,
+                      hoverColor: Colors.transparent,
+                      highlightColor: Colors.transparent,
+                      onTap: () async {
+                        context.pushNamed(
+                          'main_Chat',
+                          extra: <String, dynamic>{
+                            kTransitionInfoKey: const TransitionInfo(
+                              hasTransition: true,
+                              transitionType: PageTransitionType.fade,
+                              duration: Duration(milliseconds: 0),
+                            ),
+                          },
+                        );
+                      },
+                      child: AnimatedContainer(
+                        duration: const Duration(milliseconds: 250),
+                        curve: Curves.easeInOut,
+                        width: 44.0,
+                        height: 44.0,
+                        decoration: BoxDecoration(
                           color: () {
                             if (widget.selectedNav == 2) {
                               return FlutterFlowTheme.of(context).accent1;
@@ -211,16 +206,28 @@ class _SideNavWidgetState extends State<SideNavWidget> {
                               return FlutterFlowTheme.of(context).primary;
                             }
                           }(),
+                          borderRadius: BorderRadius.circular(12.0),
+                          border: Border.all(
+                            color: () {
+                              if (widget.selectedNav == 2) {
+                                return FlutterFlowTheme.of(context).accent1;
+                              } else if (_model.mouseRegionHovered2) {
+                                return FlutterFlowTheme.of(context).accent1;
+                              } else {
+                                return FlutterFlowTheme.of(context).primary;
+                              }
+                            }(),
+                          ),
                         ),
-                      ),
-                      child: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Icon(
-                          Icons.forum_rounded,
-                          color: widget.selectedNav == 2
-                              ? FlutterFlowTheme.of(context).info
-                              : FlutterFlowTheme.of(context).accent4,
-                          size: 24.0,
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Icon(
+                            Icons.forum_rounded,
+                            color: widget.selectedNav == 2
+                                ? FlutterFlowTheme.of(context).info
+                                : FlutterFlowTheme.of(context).accent4,
+                            size: 24.0,
+                          ),
                         ),
                       ),
                     ),
